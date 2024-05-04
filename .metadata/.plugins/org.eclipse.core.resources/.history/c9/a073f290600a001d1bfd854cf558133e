@@ -1,0 +1,29 @@
+package com.flipside.api.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.flipside.api.Entities.User;
+import com.flipside.api.Repository.ServiceProviderDao;
+import com.flipside.api.Repository.UserDao;
+
+@org.springframework.stereotype.Service
+public class Service {
+    @Autowired
+	private UserDao userDao;
+    @Autowired
+	private ServiceProviderDao serviceDao;
+	
+	public String addUser(User user) {
+		User result = userDao.save(user);
+		return "user registerd";
+	}
+
+	public String getUser(String email, String password) {
+		User user = userDao.verifyUser(email,password);
+		if(user!=null) {
+			return Integer.toString(user.getId());
+		}
+		return "not verified";
+	}
+
+}

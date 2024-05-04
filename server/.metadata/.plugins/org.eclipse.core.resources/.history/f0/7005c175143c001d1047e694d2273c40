@@ -1,0 +1,676 @@
+package com.flipside.api.services;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+
+import javax.xml.stream.events.Comment;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.flipside.api.Entities.Comments;
+import com.flipside.api.Entities.Dates;
+import com.flipside.api.Entities.Default;
+import com.flipside.api.Entities.ListDates;
+import com.flipside.api.Entities.ReturnComment;
+import com.flipside.api.Entities.ServiceProvider;
+import com.flipside.api.Entities.TempDate;
+import com.flipside.api.Entities.User;
+import com.flipside.api.Entities.Work;
+import com.flipside.api.Repository.CommentsDao;
+import com.flipside.api.Repository.DatesDao;
+import com.flipside.api.Repository.DefalutDao;
+import com.flipside.api.Repository.ServiceProviderDao;
+import com.flipside.api.Repository.UserDao;
+import com.flipside.api.Repository.WorkDao;
+import com.flipside.api.accessories.RatingComparator;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
+@org.springframework.stereotype.Service
+public class Service {
+	@Autowired
+	private UserDao userDao;
+	@Autowired
+	private ServiceProviderDao serviceDao;
+	@Autowired
+	private WorkDao workDao;
+	@Autowired
+	private DefalutDao defaultDao;
+	@Autowired
+	private CommentsDao commentsDao;
+	@Autowired
+	private DatesDao datesDao;
+
+	@Value("${app.twillio.accountSID}")
+	private String ACCOUNT_SID;
+
+	@Value("${app.twillio.authToken}")
+	private String AUTH_TOKEN;
+
+	public String addUser(User user) {
+		if (userDao.verifyEmail(user.getEmail()) == 1) {
+			return "already exists";
+		}
+		User result = userDao.save(user);
+		return "user registerd";
+	}
+
+	public String getUser(String email, String password) {
+		User user = userDao.verifyUser(email, password);
+		if (user != null) {
+			return Integer.toString(user.getId());
+		}
+		return "not verified";
+	}
+
+	public String updateUser(int userid, User user) {
+		int ra = userDao.updateUser(userid, user.getName(), user.getEmail(), user.getProfile(), user.getPassword(),
+				user.getCity(), user.getState(), user.getMobile());
+		if (ra > 0) {
+			return "updated";
+		}
+		return "not updated";
+	}
+
+	public String addservice(ServiceProvider sp) {
+		if (serviceDao.verifyEmail(sp.getEmail()) == 1) {
+			return "already exists";
+		}
+		ServiceProvider result = serviceDao.save(sp);
+		if (result != null) {
+			return "service registered";
+		}
+		return "not Registerd";
+	}
+
+	public String getService(String email, String password) {
+		ServiceProvider result = serviceDao.verifyService(email, password);
+		if (result != null) {
+			return Integer.toString(result.getId());
+		}
+		return "not verified";
+	}
+
+	public int getRating(int id) {
+		return serviceDao.getRating(id);
+	}
+
+	public int getTotalRatings(int id) {
+		return serviceDao.getTotalRating(id);
+	}
+
+	public String setRating(int id, int rating, String comment, int userid) {
+		int newRating = getRating(id) * getTotalRatings(id);
+		newRating = (newRating + rating) / (getTotalRatings(id) + 1);
+		int result = serviceDao.setRating(id, newRating);
+		if (result > 0) {
+			serviceDao.increamentRating(id, getTotalRatings(id) + 1);
+			Comments commentObj = new Comments(comment, rating, userid);
+			Comments returnComment = commentsDao.save(commentObj);
+			commentsDao.connectCommentUser(returnComment.getId(), userid);
+			commentsDao.connectCommentService(returnComment.getId(), id);
+			return "rating is registered";
+		}
+		return "Rating is not registered";
+	}
+
+	public List<ServiceProvider> getTopPlumber() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating = serviceDao.firstRating("plumber") == null ? 0 : serviceDao.firstRating("plumber");
+		int secondRating = serviceDao.secondRating("plumber", firstRating) == null ? 0
+				: serviceDao.secondRating("plumber", firstRating);
+		int thirdRating = serviceDao.thirdRating("plumber", secondRating) == null ? 0
+				: serviceDao.thirdRating("plumber", secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("plumber", firstRating);
+		List<ServiceProvider> second = serviceDao.getSecond("plumber", secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("plumber", thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for (ServiceProvider sp : result) {
+			if (result.indexOf(sp) < 3) {
+				actualList.add(sp);
+				if (actualList.size() >= 3) {
+					break;
+				}
+			}
+		}
+		return actualList;
+	}
+
+	public List<ServiceProvider> getTopElectrician() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating = serviceDao.firstRating("electrician") == null ? 0 : serviceDao.firstRating("electrician");
+		int secondRating = serviceDao.secondRating("electrician", firstRating) == null ? 0
+				: serviceDao.secondRating("electrician", firstRating);
+		int thirdRating = serviceDao.thirdRating("electrician", secondRating) == null ? 0
+				: serviceDao.thirdRating("electrician", secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("electrician", firstRating);
+		List<ServiceProvider> second = serviceDao.getSecond("electrician", secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("electrician", thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for (ServiceProvider sp : result) {
+			if (result.indexOf(sp) < 3) {
+				actualList.add(sp);
+				if (actualList.size() >= 3) {
+					break;
+				}
+			}
+		}
+		return actualList;
+	}
+
+	public List<ServiceProvider> getTopCarpenter() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating = serviceDao.firstRating("carpenter") == null ? 0 : serviceDao.firstRating("carpenter");
+		int secondRating = serviceDao.secondRating("carpenter", firstRating) == null ? 0
+				: serviceDao.secondRating("carpenter", firstRating);
+		int thirdRating = serviceDao.thirdRating("carpenter", secondRating) == null ? 0
+				: serviceDao.thirdRating("carpenter", secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("carpenter", firstRating);
+		List<ServiceProvider> second = serviceDao.getSecond("carpenter", secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("carpenter", thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for (ServiceProvider sp : result) {
+			if (result.indexOf(sp) < 3) {
+				actualList.add(sp);
+				if (actualList.size() >= 3) {
+					break;
+				}
+			}
+		}
+		return actualList;
+	}
+
+	public List<ServiceProvider> getTopPainter() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating = serviceDao.firstRating("painter") == null ? 0 : serviceDao.firstRating("painter");
+		int secondRating = serviceDao.secondRating("painter", firstRating) == null ? 0
+				: serviceDao.secondRating("painter", firstRating);
+		int thirdRating = serviceDao.thirdRating("painter", secondRating) == null ? 0
+				: serviceDao.thirdRating("painter", secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("painter", firstRating);
+		List<ServiceProvider> second = serviceDao.getSecond("painter", secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("painter", thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for (ServiceProvider sp : result) {
+			if (result.indexOf(sp) < 3) {
+				actualList.add(sp);
+				if (actualList.size() >= 3) {
+					break;
+				}
+			}
+		}
+		return actualList;
+	}
+
+	public List<ServiceProvider> getTopPackers() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating = serviceDao.firstRating("packersandmovers") == null ? 0
+				: serviceDao.firstRating("packersandmovers");
+		int secondRating = serviceDao.secondRating("packersandmovers", firstRating) == null ? 0
+				: serviceDao.secondRating("packersandmovers", firstRating);
+		int thirdRating = serviceDao.thirdRating("packersandmovers", secondRating) == null ? 0
+				: serviceDao.thirdRating("packersandmovers", secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("packersandmovers", firstRating);
+		List<ServiceProvider> second = serviceDao.getSecond("packersandmovers", secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("packersandmovers", thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for (ServiceProvider sp : result) {
+			if (result.indexOf(sp) < 3) {
+				actualList.add(sp);
+				if (actualList.size() >= 3) {
+					break;
+				}
+			}
+		}
+		return actualList;
+	}
+
+	public List<ServiceProvider> getTopTilesMaker() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating = serviceDao.firstRating("tilesmaker") == null ? 0 : serviceDao.firstRating("tilesmaker");
+		int secondRating = serviceDao.secondRating("tilesmaker", firstRating) == null ? 0
+				: serviceDao.secondRating("tilesmaker", firstRating);
+		int thirdRating = serviceDao.thirdRating("tilesmaker", secondRating) == null ? 0
+				: serviceDao.thirdRating("tilesmaker", secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("tilesmaker", firstRating);
+		List<ServiceProvider> second = serviceDao.getSecond("tilesmaker", secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("tilesmaker", thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for (ServiceProvider sp : result) {
+			if (result.indexOf(sp) < 3) {
+				actualList.add(sp);
+				if (actualList.size() >= 3) {
+					break;
+				}
+			}
+		}
+		return actualList;
+	}
+
+	public List<ServiceProvider> getAll(String occ, String sortBy, String city) {
+		if (sortBy.equals("rating")) {
+			List<ServiceProvider> result = serviceDao.getAll(occ);
+			result.sort(new RatingComparator());
+			return result;
+		} else if (sortBy.equals("nearby")) {
+			List<ServiceProvider> result = serviceDao.getAll(occ, city);
+			return result;
+		} else {
+			List<ServiceProvider> result = serviceDao.getAll(occ);
+			return result;
+		}
+	}
+
+	public ServiceProvider getServiceProvider(int id) {
+		return serviceDao.getserviceProvider(id);
+	}
+
+	public User getUniqueUser(int id) {
+		return userDao.findUserById(id);
+	}
+
+	public String setAppointement(int userid, int serviceid) {
+		if (userDao.verifyOrder(userid, serviceid) > 0) {
+			return "already appointed";
+		}
+		Integer a = userDao.setUserorder(userid, serviceid);
+		Integer b = serviceDao.setServiceorder(serviceid, userid);
+		if (a == null || b == null) {
+			return "Not added";
+		}
+		return "orders updated";
+	}
+
+	public List<ServiceProvider> getUserOrders(int id) {
+		List<Integer> orderIds = userDao.getOrdersId(id);
+		List<ServiceProvider> orders = new ArrayList<>();
+		for (int a : orderIds) {
+			orders.add(getServiceProvider(a));
+		}
+		return orders;
+	}
+
+	public List<User> getServiceOrders(int id) {
+		List<Integer> orderIds = serviceDao.getOrdersId(id);
+		List<User> orders = new ArrayList<>();
+		for (int a : orderIds) {
+			orders.add(getUniqueUser(a));
+		}
+		return orders;
+	}
+
+	public String updateServiceProvider(int id, String name, String description, String email, String mobile,
+			String adress, String city, String state, MultipartFile profile) {
+		try {
+			int result;
+			result = serviceDao.updateService(id, name, description, email, mobile, adress, city, state,
+					profile.getBytes());
+			if (result > 0) {
+				return "updated";
+			} else {
+				return "not updated";
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "not updated";
+	}
+
+	public String updateWork(int id, MultipartFile newWork) {
+		Work work;
+		try {
+			work = new Work(newWork.getBytes());
+			Work result = workDao.save(work);
+			int ra = workDao.setUpConnection(id, result.getId());
+			if (ra > 0) {
+				return "updated";
+			} else {
+				return "not updated";
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "not updated";
+	}
+
+	public String deleteWork(int serviceId, int workId) {
+		workDao.deleteById(workId);
+		int ra = workDao.removeConnection(serviceId, workId);
+		if (ra > 0) {
+			return "deleted";
+		}
+		return "not deleted";
+	}
+
+	public String adddefaultPic(MultipartFile bytes) {
+		Default pic;
+		try {
+			pic = new Default(1, bytes.getBytes());
+			defaultDao.save(pic);
+			return "saved";
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "not saved";
+	}
+
+	public Default getDefaultProfile() {
+		return defaultDao.getByObjectId(1);
+	}
+
+	public List<Work> getWork(int id) {
+		List<Integer> work_id = workDao.getWorkIds(id);
+		List<Work> work = new ArrayList<Work>();
+		for (int a : work_id) {
+			work.add(workDao.getWork(a));
+		}
+		return work;
+	}
+
+	public String deleteContract(int serviceid, int userid) {
+		Integer user = userDao.deleteContract(userid, serviceid);
+		Integer service = serviceDao.deleteContract(serviceid, userid);
+		userDao.addToDeletedList(serviceid, userid);
+		if (user != null && service != null) {
+			return "deleted";
+		}
+		return "not deleted";
+	}
+
+	public String completeContract(int serviceid, int userid) {
+		Integer user = userDao.deleteContract(userid, serviceid);
+		Integer service = serviceDao.deleteContract(serviceid, userid);
+		userDao.addToCompletedList(serviceid, userid);
+		if (user != null && service != null) {
+			return "deleted";
+		}
+		return "not deleted";
+	}
+
+	public List<ServiceProvider> getDeletedOrders(int id) {
+		List<Integer> ServiceIds = userDao.getDeletedOrders(id);
+		List<ServiceProvider> orders = new ArrayList<ServiceProvider>();
+		for (int a : ServiceIds) {
+			orders.add(getServiceProvider(a));
+		}
+		return orders;
+	}
+
+	public List<ServiceProvider> getCompletedOrders(int id) {
+		List<Integer> ServiceIds = userDao.getCompletedOrders(id);
+		List<ServiceProvider> orders = new ArrayList<ServiceProvider>();
+		for (int a : ServiceIds) {
+			orders.add(getServiceProvider(a));
+		}
+		return orders;
+	}
+
+	public String finalDeleteD(int userid, int serviceid) {
+		int ra = userDao.deleteFinalD(userid, serviceid);
+		if (ra > 0) {
+			return "deleted";
+		}
+		return "not deleted";
+	}
+
+	public String finalDeleteC(int userid, int serviceid) {
+		int ra = userDao.deleteFinalC(userid, serviceid);
+		if (ra > 0) {
+			return "deleted";
+		}
+		return "not deleted";
+	}
+
+	public List<ReturnComment> getAllRating(int id) {
+		List<Integer> commentsId = serviceDao.getCommentsId(id);
+		List<ReturnComment> comments = new ArrayList<>();
+		for (int a : commentsId) {
+			Comments c = commentsDao.getComment(a);
+			User u = getUniqueUser(c.getUser());
+			comments.add(new ReturnComment(c, u));
+		}
+		return comments;
+	}
+
+	public String addDeleteRequest(int userid, int serviceid) {
+		int ra = serviceDao.addDeleteRequest(serviceid, userid);
+		if (ra > 0) {
+			return "added";
+		}
+		return "not added";
+	}
+
+	public List<User> getDeleteRequest(int serviceid) {
+		List<Integer> requestId = serviceDao.getDeleteRequest(serviceid);
+		List<User> result = new ArrayList<>();
+		for (int a : requestId) {
+			result.add(getUniqueUser(a));
+		}
+		return result;
+	}
+
+	public String acceptDeleteRequest(int userid, int serviceid) {
+		deleteContract(serviceid, userid);
+		int ra = serviceDao.removeDeleteRequest(serviceid, userid);
+		if (ra > 0) {
+			return "deleted";
+		}
+		return "not deleted";
+	}
+
+	public String checkConnection(int userid, int serviceid) {
+		int result = serviceDao.checkConnection(serviceid, userid);
+		if (result > 0) {
+			return "already sent";
+		}
+		return "ok to send";
+	}
+
+	public String updateUserwithoutProfile(int userid, User user) {
+		int ra = userDao.updatewithoutProfile(userid, user.getName(), user.getEmail(), user.getPassword(),
+				user.getCity(), user.getState(), user.getMobile());
+		if (ra > 0) {
+			return "updated";
+		}
+		return "not updated";
+	}
+
+	public String updateServiceProviderWithoutProfile(int id, String name, String description, String email,
+			String mobile, String adress, String city, String state) {
+
+		int result;
+		result = serviceDao.updateServiceWithoutProfile(id, name, description, email, mobile, adress, city, state);
+		if (result > 0) {
+			return "updated";
+		} else {
+			return "not updated";
+		}
+
+	}
+
+	public String deleteUser(int id) {
+		// comments delete
+		List<Integer> commentsIds = commentsDao.FindAllCommentsById(id);
+		for (int a : commentsIds) {
+			commentsDao.deleteById(a);
+			serviceDao.deleteComment(a);
+		}
+		commentsDao.deleteConnection(id);
+
+		// delete user orders
+		userDao.deleteOrders(id);
+
+		// delete from service provider orders
+		serviceDao.deleteOrders(id);
+
+		// delete from service_provider_delete_request
+		serviceDao.deleteRequest(id);
+
+		// completed orders and deleted orders
+		userDao.deleteDeletedOrders(id);
+		userDao.deleteCompletedOrders(id);
+
+		// user delete
+		userDao.deleteFromUser(id);
+		return "deleted";
+	}
+
+	public String deleteService(int id) {
+		// delete comments
+		List<Integer> commentsId = commentsDao.FindAllComments(id);
+		for (int a : commentsId) {
+			commentsDao.deleteById(a);
+			userDao.deleteComment(a);
+		}
+		serviceDao.deleteConnection(id);
+
+		// delete work
+		List<Integer> workIds = serviceDao.findAllWork(id);
+		for (int a : workIds) {
+			workDao.deleteById(a);
+		}
+		serviceDao.deleteWorkConnection(id);
+
+		// delete service from users
+		serviceDao.deleteOrdersByServiceId(id);
+
+		userDao.deleteOrdersByServiceId(id);
+
+		// deleted completed
+		userDao.deleteDeletedOrdersByServiceId(id);
+		userDao.deleteCompletedOrdersByServiceId(id);
+
+		// delete request
+		serviceDao.deleteDeleteRequest(id);
+
+		serviceDao.deleteById(id);
+
+		return "deleted";
+	}
+
+	public String addDate(ArrayList<TempDate> list, int id) {
+		for (TempDate a : list) {
+			Dates temp = datesDao.save(new Dates(a.date, a.day, a.month, a.year));
+			int retVal = datesDao.createConnection(id, temp.getDateid());
+			if (retVal == 0) {
+				return "Error with insertion";
+			}
+		}
+		return "success";
+	}
+
+	public ArrayList<TempDate> getDates(int id) {
+		ArrayList<Integer> datesId = datesDao.getIds(id);
+		ArrayList<TempDate> actList = new ArrayList<>();
+		for (int i : datesId) {
+			Dates temp = datesDao.getById(i);
+			actList.add(new TempDate(temp.getDay(), temp.getDate(), temp.getMonth(), temp.getYear()));
+		}
+		return actList;
+	}
+
+	public String resetDates(int id) {
+		ArrayList<Integer> ids = datesDao.getIds(id);
+		for (int a : ids) {
+			datesDao.deleteById(a);
+		}
+		Integer ra = datesDao.deleteConnection(id);
+		return "success";
+	}
+
+	public String deleteDates(int id, ArrayList<TempDate> list) {
+		for (TempDate a : list) {
+			Integer tempid = datesDao.findId(a.date, a.month, a.year);
+			if (tempid != null) {
+				datesDao.deleteById(tempid);
+				datesDao.deleteSingleConnection(id, tempid);
+			}
+		}
+		return "success";
+	}
+
+	public String sendOTP(String number, String from) {
+		Random rand = new Random();
+		String otp = String.format("%04d", rand.nextInt(10000));
+		try {
+			Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+			Message msg = Message.creator(new PhoneNumber(number), new PhoneNumber(from), otp).create();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return otp;
+	}
+
+	public String checkServiceEmailAndPhone(String email, String phone) {
+		int ret = serviceDao.checkEmailAndPhone(email, phone);
+		System.out.println(ret);
+		if (ret > 0) {
+			String pass = serviceDao.getPasswordByPhoneandEmail(email, phone);
+			return pass;
+		}
+		return "400F";
+
+	}
+
+	public String checkUserEmailAndPhone(String email, String phone) {
+		int ret = userDao.checkEmailAndPhone(email, phone);
+		System.out.println(ret);
+		if (ret > 0) {
+			String pass = userDao.getPasswordByPhoneandEmail(email, phone);
+			return pass;
+		}
+		return "400F";
+	}
+
+	public String changePassByNumber(String phone, String pass, int code) {
+		if (code == 1) {
+			int ret = userDao.changePass(phone, pass);
+			if (ret > 0) {
+				return "200F";
+			}
+			return "400F";
+		}else {
+			int ret = serviceDao.changePass(phone, pass);
+			if (ret > 0) {
+				return "200F";
+			}
+			return "400F";
+		}
+	}
+
+}

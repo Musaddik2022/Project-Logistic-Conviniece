@@ -1,0 +1,27 @@
+package com.flipside.api.Entities;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+@Entity
+public class ServiceProvider {
+     private String email;
+     private String Adress;
+     private String city;
+     private String state;
+     private String mobile;
+     private String password;
+     private String occupation;
+     private boolean isLogin;
+     private String description;
+     @Lob
+     private byte[] profile;
+     @OneToMany
+     private List<WorkImage> work;
+     @ManyToMany
+     private List<User> orders;
+}

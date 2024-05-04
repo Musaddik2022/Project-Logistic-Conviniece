@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+<fullyQualifiedTypeName name="com.Spring.RestApi.eepository.ServiceProviderDao"/>
+<fullyQualifiedTypeName name="com.flipside.api.repository.ServiceProviderDao"/>
+<fullyQualifiedTypeName name="com.flipside.api.repository.UserDao"/>
+<fullyQualifiedTypeName name="com.flipside.api.Entity.User"/>
+<fullyQualifiedTypeName name="com.flipside.api.Entity.UserProfile"/>
+<fullyQualifiedTypeName name="com.flipside.api.service.Service"/>
+<fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+<fullyQualifiedTypeName name="com.flipside.api.services.Service"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="javax.persistence.Lob"/>
+<fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
+<fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+<fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="com.flipside.api.Repository.UserDao"/>
+<fullyQualifiedTypeName name="com.flipside.api.Repository.ServiceProviderDao"/>
+<fullyQualifiedTypeName name="com.flipside.api.Entities.User"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+<fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
+<fullyQualifiedTypeName name="com.flipside.api.Entities.ServiceProvider"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
+<fullyQualifiedTypeName name="com.flipside.api.accessories.RatingComparator"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+</qualifiedTypeNameHistroy>

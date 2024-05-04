@@ -1,0 +1,5 @@
+package com.flipside.api.Entity;
+
+public class User {
+
+}

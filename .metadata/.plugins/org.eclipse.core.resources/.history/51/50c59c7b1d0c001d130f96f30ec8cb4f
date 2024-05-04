@@ -1,0 +1,5 @@
+package com.flipside.api.accessories;
+
+public class RatingComparator {
+
+}

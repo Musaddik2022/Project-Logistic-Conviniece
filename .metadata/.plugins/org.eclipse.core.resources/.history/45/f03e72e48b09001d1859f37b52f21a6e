@@ -1,0 +1,23 @@
+package com.flipside.api.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.flipside.api.Entity.UserProfile;
+import com.flipside.api.repository.UserDao;
+
+@org.springframework.stereotype.Service
+public class Service {
+	@Autowired
+	UserDao userDao;
+
+	public List<UserProfile> getAll() {
+		return userDao.findAll();
+	}
+
+	public UserProfile addUser(UserProfile user) {
+		return userDao.save(user);
+	}
+
+}

@@ -1,0 +1,166 @@
+.service-dash{
+    display: flex;
+    height: 160vh;
+}
+
+.first{
+   flex:9;
+}
+
+.second{
+    flex:3;
+    display: flex;
+    flex-direction: column;
+}
+
+.pending-orders{
+    flex:5;
+    background-color: rgb(164, 198, 250);
+    display: flex;
+    flex-direction: column;
+}
+
+.order-head{
+    display: flex;
+    background-color: rgb(119, 171, 255);
+    padding:10px;
+}
+
+.order-container{
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    height: 81%;
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow-y: scroll;
+    scrollbar-width: 5px;
+    scroll-snap-stop: none;
+}
+
+.single-order{
+   display: flex;
+   padding: 5px;
+   margin: 5px;
+   background-color: rgb(205, 230, 253);
+   border-radius: 5px;
+   box-shadow: 1px 1px 5px rgb(183, 183, 183);
+}
+
+
+.name{
+    flex:7;
+    font-size: 21px;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.single-contact{
+    flex:2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.single-order:hover{
+    transform: translateX(3px);
+}
+
+.single-contact > a{
+    margin-right: 4px;
+}
+
+.complete-delete{
+    flex:2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.complete-delete > a{
+    margin-right: 30px;
+}
+
+.select-icon{
+    font-size: 20px;
+    color: rgb(1, 85, 158);
+}
+
+.order-head > h2 > i{
+    margin-right: 5px;
+}
+
+.my-work{
+   flex:5;
+}
+
+.work-container{
+    margin: 5px 10px;
+    background-color: rgb(193, 224, 249);
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.work-container > img{
+    width: 32%;
+    margin: 5px;
+    box-shadow: 1px 1px 3px black;
+}
+
+.head-template{
+    margin: 10px;
+    background-color: rgb(119, 171, 255);
+    padding: 10px;
+}
+
+.head-template > h2 > i{
+    margin-right: 10px;
+}
+
+.edit{
+    display: flex;
+    justify-content: right;
+}
+
+.edit > a{
+    text-decoration: none;
+    margin-right: 15px;
+    margin-top: 5px;
+    font-size: 18px;
+    background-color: rgb(178, 219, 255);
+    padding:7px;
+}
+
+.edit > a > i{
+    margin-left: 2px;
+}
+
+.single-contact{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.single-contact > i{
+    margin-right: 5px;
+    padding:3px;
+}
+
+button {
+    background: transparent;
+    border: none;
+    color:black;  
+    margin-right: 20px; 
+    cursor: pointer;
+}
+
+button > i{
+    color: black;
+}

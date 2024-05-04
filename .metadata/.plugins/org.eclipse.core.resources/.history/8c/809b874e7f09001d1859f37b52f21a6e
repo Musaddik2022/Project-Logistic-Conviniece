@@ -1,0 +1,84 @@
+package com.flipside.api.Entities;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
+public class User {
+	@Id
+	private String email;
+	private String password;
+	private boolean isLogin;
+	private String name;
+	private String mobile;
+	@ManyToMany
+	private List<ServiceProvider> orders;
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(String email, String password, boolean isLogin, String name, String mobile,
+			List<ServiceProvider> orders) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.isLogin = isLogin;
+		this.name = name;
+		this.mobile = mobile;
+		this.orders = orders;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public boolean isLogin() {
+		return isLogin;
+	}
+
+	public void setLogin(boolean isLogin) {
+		this.isLogin = isLogin;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public List<ServiceProvider> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<ServiceProvider> orders) {
+		this.orders = orders;
+	}
+
+}

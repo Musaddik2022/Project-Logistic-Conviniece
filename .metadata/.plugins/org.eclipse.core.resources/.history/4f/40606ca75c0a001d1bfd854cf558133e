@@ -1,0 +1,18 @@
+package com.flipside.api.services;
+
+import com.flipside.api.Entities.User;
+import com.flipside.api.Repository.ServiceProviderDao;
+import com.flipside.api.Repository.UserDao;
+
+@org.springframework.stereotype.Service
+public class Service {
+    
+	private UserDao userDao;
+	private ServiceProviderDao serviceDao;
+	
+	public String addUser(User user) {
+		User result = userDao.save(user);
+		return "user registerd";
+	}
+
+}

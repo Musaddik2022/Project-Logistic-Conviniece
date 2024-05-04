@@ -1,0 +1,9 @@
+package com.flipside.api.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.flipside.api.Entities.ServiceProvider;
+
+public interface ServiceProviderDao extends JpaRepository<ServiceProvider, Integer>{
+
+}

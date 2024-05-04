@@ -1,0 +1,93 @@
+.login-middle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height:600px;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.login-middle > h1{
+    font-size: 80px;
+    color: rgb(44, 175, 252);
+}
+
+.login-box2{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.login-box2 > a{
+    text-decoration: none;
+    color: rgb(0, 53, 123);
+}
+
+.login-box2 > h3{
+    margin-top: 20px;
+}
+
+.login-box-plate{
+    display: flex;
+    justify-content: left;
+    align-content: left;
+    align-items:center;
+    justify-items: left;
+    background-color: rgb(191, 225, 255);
+    width:100%;
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 8px;
+}
+
+.login-box-plate:hover{
+    box-shadow: 1px 1px 5px black; 
+}
+
+.login-box-plate > i{
+    color: rgb(3, 106, 135);
+    margin-right: 8px;
+}
+
+
+.login-box-plate > a{
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    color: black;
+}
+
+.login-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding:20px;
+}
+
+.welcome-banner{
+    margin-right: 60px;
+    background-image: url(https://blog.vmgstudios.com/hs-fs/hubfs/disney-liquid-morphing-motion-animation-vmg-studios.gif?width=650&name=disney-liquid-morphing-motion-animation-vmg-studios.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:450px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.welcome-banner > h1{
+    font-size: 60px;
+    color: rgb(136, 209, 255);
+}
+
+.welcome-banner > h3{
+    color: white;
+}

@@ -1,0 +1,7 @@
+
+ƒsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½¢•°8ƒÜ…Ð¢0HéRMINORZ
+CODE_SMELL
+ˆsquid:S001004"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.( ñú‡úÿÿÿÿ8Äú™Ñ¢0HçRMINORZ
+CODE_SMELL
+–squid:UselessImportCheck"PRemove this unused import 'org.springframework.web.bind.annotation.RequestBody'.(â­½Àýÿÿÿÿ8ƒÜ…Ð¢0HèRMINORZ
+CODE_SMELL

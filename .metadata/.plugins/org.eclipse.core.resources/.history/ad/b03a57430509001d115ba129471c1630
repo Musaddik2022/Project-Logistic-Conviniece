@@ -1,0 +1,23 @@
+package com.flipside.api.Entities;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
+public class User {
+	   @Id
+       private String email;
+       private String password;
+       private boolean isLogin;
+       private String name;
+       private String mobile;
+       @ManyToMany
+       private List<ServiceProvider> orders;
+       
+       
+       
+       
+}

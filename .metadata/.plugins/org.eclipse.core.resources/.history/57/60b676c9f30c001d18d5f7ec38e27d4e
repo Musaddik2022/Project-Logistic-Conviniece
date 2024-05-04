@@ -1,0 +1,66 @@
+package com.flipside.api.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.flipside.api.Entities.ServiceProvider;
+
+public interface ServiceProviderDao extends JpaRepository<ServiceProvider, Integer>{
+    
+	@Query(value="select * from service_provider where email=:e and password=:p",nativeQuery=true)
+	ServiceProvider verifyService(@Param("e") String email,@Param("p") String password);
+    
+	//top three ratings
+	@Query(value="select Max(rating) from service_provider where occupation=:o",nativeQuery=true)
+	int firstRating(@Param("o") String occ);
+	
+	@Query(value="select Max(rating) from service_provider where occupation=:o and rating < :r",nativeQuery=true)
+	int secondRating(@Param("o") String occ,@Param("r") int first);
+	
+	@Query(value="select Max(rating) from service_provider where occupation=:o and rating < :r",nativeQuery=true)
+	int thirdRating(@Param("o") String occ,@Param("r") int second);
+	
+	//Top 3 employees
+	@Query(value="select * from service_provider where rating =:r  and occupation=:o",nativeQuery=true)
+	ArrayList<ServiceProvider> getFirst(@Param("o") String occ,@Param("r") int first);
+    
+	@Query(value="select * from service_provider where rating =:r and occuaption=:o",nativeQuery=true)
+	ArrayList<ServiceProvider> getSecond(@Param("o") String occ, @Param("r") int second);
+    
+	@Query(value="select * from service_provider where rating =:r and occupation=:o",nativeQuery=true)
+	ArrayList<ServiceProvider> getThird(@Param("o") String occ,@Param("r") int third);
+    
+	
+	@Transactional
+	@Modifying
+	@Query(value="update service_provider set rating=:r where id=:i",nativeQuery=true)
+	int setRating(@Param("i") int id,@Param("r") int rating);
+    
+	@Query(value="select rating from service_provider where id=:i",nativeQuery=true)
+	int getRating(@Param("i") int id);
+	
+	@Query(value="select total_ratings from service_provider where id=:i",nativeQuery=true)
+	int getTotalRating(@Param("i") int id);
+    
+	@Transactional
+	@Modifying
+	@Query(value="update service_provider set total_ratings=:t where id=:i",nativeQuery=true)
+	int increamentRating(@Param("i") int id,@Param("t") int total);
+    
+	@Query(value="select * from service_provider where occupation=:o",nativeQuery=true)
+	List<ServiceProvider> getAll(@Param("o") String occ);
+    
+	@Query(value="select * from service_provider where occupation =:o and city=:c",nativeQuery=true)
+	List<ServiceProvider> getAll(@Param("o") String occ,@Param("c") String city);
+    
+	@Query(value="select count(*) from service_provider where email=:e",nativeQuery=true)
+	int verifyEmail(@Param("e") String email);
+
+}

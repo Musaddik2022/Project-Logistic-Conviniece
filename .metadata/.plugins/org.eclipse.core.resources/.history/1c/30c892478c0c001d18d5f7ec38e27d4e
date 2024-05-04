@@ -1,0 +1,178 @@
+package com.flipside.api.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.flipside.api.Entities.ServiceProvider;
+import com.flipside.api.Entities.User;
+import com.flipside.api.Repository.ServiceProviderDao;
+import com.flipside.api.Repository.UserDao;
+import com.flipside.api.accessories.RatingComparator;
+
+@org.springframework.stereotype.Service
+public class Service {
+    @Autowired
+	private UserDao userDao;
+    @Autowired
+	private ServiceProviderDao serviceDao;
+	
+	public String addUser(User user) {
+		User result = userDao.save(user);
+		return "user registerd";
+	}
+
+	public String getUser(String email, String password) {
+		User user = userDao.verifyUser(email,password);
+		if(user!=null) {
+			return Integer.toString(user.getId());
+		}
+		return "not verified";
+	}
+
+	public String addservice(ServiceProvider sp) {
+		ServiceProvider result = serviceDao.save(sp);
+		if(result!=null) {
+			return "service registered";
+		}
+		return "not Registerd";
+	}
+
+	public String getService(String email, String password) {
+        ServiceProvider result = serviceDao.verifyService(email,password);
+        if(result!=null) {
+        	return "verified";
+        }
+		return "not verified";
+	}
+
+	public int getRating(int id) {
+		return serviceDao.getRating(id);
+	}
+	
+	public int getTotalRatings(int id) {
+		return serviceDao.getTotalRating(id);
+	}
+   
+	public String setRating(int id, int rating) {
+		int newRating = getRating(id)*getTotalRatings(id);
+		newRating = (newRating+rating)/(getTotalRatings(id)+1);
+		int result = serviceDao.setRating(id,newRating);
+		if(result > 0) {
+			serviceDao.increamentRating(id,getTotalRatings(id)+1);
+			return "rating is registered";
+		}
+		return "Rating is not registered";
+	}
+
+	public List<ServiceProvider> getTopPlumber() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		List<ServiceProvider> first = serviceDao.getFirst("plumber"); 
+		List<ServiceProvider> second = serviceDao.getSecond("plumber");
+		List<ServiceProvider> third = serviceDao.getThird("plumber");
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+
+	public List<ServiceProvider> getTopElectrician() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		List<ServiceProvider> first = serviceDao.getFirst("electrician"); 
+		List<ServiceProvider> second = serviceDao.getSecond("electrician");
+		List<ServiceProvider> third = serviceDao.getThird("electrician");
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+	
+	public List<ServiceProvider> getTopCarpenter() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		List<ServiceProvider> first = serviceDao.getFirst("carpenter"); 
+		List<ServiceProvider> second = serviceDao.getSecond("carpenter");
+		List<ServiceProvider> third = serviceDao.getThird("carpenter");
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+	
+	public List<ServiceProvider> getTopPainter(){
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		List<ServiceProvider> first = serviceDao.getFirst("painter"); 
+		List<ServiceProvider> second = serviceDao.getSecond("painter");
+		List<ServiceProvider> third = serviceDao.getThird("painter");
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+
+	public List<ServiceProvider> getTopPackers() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		List<ServiceProvider> first = serviceDao.getFirst("packersandmovers"); 
+		List<ServiceProvider> second = serviceDao.getSecond("packersandmovers");
+		List<ServiceProvider> third = serviceDao.getThird("packersandmovers");
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+
+	public List<ServiceProvider> getTopTilesMaker() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		List<ServiceProvider> first = serviceDao.getFirst("tilesmaker"); 
+		List<ServiceProvider> second = serviceDao.getSecond("tilesmaker");
+		List<ServiceProvider> third = serviceDao.getThird("tilesmaker");
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+
+
+}

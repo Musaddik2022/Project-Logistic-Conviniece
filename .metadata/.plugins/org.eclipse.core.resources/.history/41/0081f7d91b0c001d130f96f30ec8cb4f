@@ -1,0 +1,28 @@
+package com.flipside.api.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.flipside.api.Entities.ServiceProvider;
+
+public interface ServiceProviderDao extends JpaRepository<ServiceProvider, Integer>{
+    
+	@Query(value="select * from service_provider where email=:e and password=:p",nativeQuery=true)
+	ServiceProvider verifyService(@Param("e") String email,@Param("p") String password);
+    
+	//Carpenters Top 3
+	
+	@Query(value="select * from service_provider where rating = (select max(rating) from service_provider) and occupation='carpenter' ",nativeQuery=true)
+	ArrayList<ServiceProvider> getFirstCarpenter();
+    
+	@Query(value=" select * from service_provider where rating = (select Max(rating) from (select * from service_provider where rating < (select max(rating) from service_provider)  and occupation='carpenter') and occupation='carpenter' as s1 )",nativeQuery=true)
+	ArrayList<ServiceProvider> getSecondCarpenter();
+    
+	@Query(value="select * from service_provider where rating = (select Max(rating) from (select * from service_provider where rating < (select Max(rating) from (select * from service_provider where rating < (select max(rating) from service_provider) and occupation='carpenter') and occupation='carpenter' as s1 ) and occupation='carpenter') and occupation='carpenter' as s2)",nativeQuery=true)
+	ArrayList<ServiceProvider> getThirdCarpenter();
+
+}

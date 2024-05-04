@@ -1,0 +1,60 @@
+.profile-edit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(https://cdn.wallpapersafari.com/91/77/1GXck0.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profile-edit-box{
+    display: flex;
+    margin:30px;
+    background-color: aliceblue;
+    padding:50px;
+    box-shadow: 1px 1px 5px black;
+}
+
+.edit-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-group-dp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-dp{
+    height:250px;
+    width: 250px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.edit-group{
+    display: flex;
+    justify-content: left;
+    width:100%;
+    margin-top: 10px;
+}
+
+.edit-group > label{
+    flex:5;
+}
+
+.edit-group > input{
+    flex:9.5;
+}
+
+.delete-account{
+    width: 100%;
+    justify-content: right;
+    display: flex;
+}

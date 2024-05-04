@@ -1,0 +1,54 @@
+.logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height:80vh;
+}
+
+.logout-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.dot-box{
+    width:80%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    height:300px;
+}
+
+.logout-box > h1{
+    margin-bottom: 10px;
+    font-size: 35px;
+    color: rgb(33, 151, 255);
+}
+
+.dot1{
+    display: flex;
+    font-size: 200px;
+    color:rgb(28, 149, 255);
+    animation:updown1 2s infinite linear;
+}
+
+.logout-box > h3{
+    color: rgb(61, 61, 61);
+}
+
+@keyframes updown1{
+    0%{
+        margin-top: 0px;
+    }
+
+    50%{
+        margin-top: -140px;
+    }
+
+    100%{
+        margin-top: 0px;
+    }
+}

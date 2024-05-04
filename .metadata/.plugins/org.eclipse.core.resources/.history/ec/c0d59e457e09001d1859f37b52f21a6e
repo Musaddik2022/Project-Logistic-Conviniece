@@ -1,0 +1,23 @@
+package com.flipside.api.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.flipside.api.Entities.ServiceProvider;
+import com.flipside.api.repository.ServiceProviderDao;
+
+public class Service {
+    
+	@Autowired
+	ServiceProviderDao serviceProviderDao; 
+	
+	public List<ServiceProvider> getAll() {
+		return this.serviceProviderDao.findAll();
+	}
+
+	public ServiceProvider addService(ServiceProvider serviceProvider) {
+		return this.serviceProviderDao.save(serviceProvider);
+	}
+
+}

@@ -1,0 +1,71 @@
+.ratework{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height:110vh;
+    align-items: center;
+}
+
+.ratework-box{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(207, 233, 255);
+    width:30%;
+    padding:30px;
+}
+
+.ratework-box > h1{
+    color: #0788f9;
+    margin:5px 0px;
+}
+
+.ratework-box > h4{
+    color: rgb(88, 87, 87);
+    margin: 5px 0px;
+}
+
+.rate-box{
+    display: flex;
+    justify-content: space-evenly;
+    width:60%;
+    margin:10px 0px;
+}
+
+.rate-box > i{
+    font-size: 30px;
+}
+
+.ratework-box > h3{
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.blue-color{
+    color:#37a2ff
+}
+
+.rate-cal{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.user-image-rate{
+    width:200px;
+    height:200px;
+    object-fit: cover;
+    border-radius: 50%;
+    padding:20px 0px;
+}
+
+.form-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-div > textarea{
+    font-size: 15px;
+}

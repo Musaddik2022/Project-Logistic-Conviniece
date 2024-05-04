@@ -1,0 +1,5 @@
+package com.flipside.api.controllers;
+
+public class Controller {
+
+}

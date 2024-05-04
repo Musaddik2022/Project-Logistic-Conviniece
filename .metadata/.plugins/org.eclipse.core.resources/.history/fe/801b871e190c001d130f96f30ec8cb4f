@@ -1,0 +1,60 @@
+package com.flipside.api.controllers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.flipside.api.Entities.ServiceProvider;
+import com.flipside.api.Entities.User;
+import com.flipside.api.services.Service;
+
+@RestController
+public class Controller {
+    @Autowired 
+	private Service service;
+	
+	@PostMapping("/adduser")
+	public String AddUser(
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("mobile") String mobile,
+			@RequestParam("password") String password
+			) {
+
+		User user = new User(email,name,mobile,password,new ArrayList<ServiceProvider>());
+		return service.addUser(user);
+		
+	}
+	
+	@GetMapping("/getuser")
+	public String getUser(@RequestParam("email") String email,@RequestParam("password") String password) {   
+		return service.getUser(email,password); 
+	}
+	
+	@PostMapping("/addservice")
+	public String AddService(
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("adress") String adress,
+			@RequestParam("city") String city,
+			@RequestParam("state") String state,
+			@RequestParam("mobile") String mobile,
+			@RequestParam("password") String password,
+			@RequestParam("occupation") String occupation
+			) {
+		
+		ServiceProvider sp = new ServiceProvider(name,email,occupation,adress,city,state,password,mobile,"",null,new ArrayList<User>());
+		return service.addservice(sp);
+	}
+	
+	@GetMapping("/getservice")
+	public String getService(@RequestParam("email") String email,@RequestParam("password") String password) {
+		return service.getService(email,password);
+	}
+}

@@ -1,0 +1,28 @@
+package com.flipside.api.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.flipside.api.Entities.User;
+import com.flipside.api.services.Service;
+
+@RestController
+public class Controller {
+    @Autowired 
+	private Service service;
+	
+	@PostMapping("/adduser")
+	public String AddUser(
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("mobile") String mobile,
+			@RequestParam("password") String password
+			) {
+		User user = new User(email,name,password);
+		return service.addUser(user);
+		
+	}
+}

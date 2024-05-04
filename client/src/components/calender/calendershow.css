@@ -1,0 +1,10 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.calender-boxshow{
+    background-color: aliceblue;
+    padding:5px;
+    border-radius: 5px;
+}

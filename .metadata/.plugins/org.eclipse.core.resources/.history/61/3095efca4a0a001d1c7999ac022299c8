@@ -1,0 +1,21 @@
+package com.flipside.api.Entities;
+
+import java.util.List;
+
+@Entity
+public class ServiceProvider {
+	    private int id;
+        private String name;
+        private String email;
+        private String occupation;
+        private String adress;
+        private String city;
+        private String state;
+        private String password;
+        private String mobile;
+        private String description;
+        private byte[] profile;
+        
+        private List<User> orders;
+        
+}

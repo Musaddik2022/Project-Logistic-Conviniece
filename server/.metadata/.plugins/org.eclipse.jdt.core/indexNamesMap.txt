@@ -1,0 +1,3 @@
+INDEX VERSION 1.131
+file:/media/musaddik/B27827FF7827C149/Project/flipside/e-commerce/server/.metadata/.plugins/org.eclipse.jdt.core/1865797976.index
+meta_index

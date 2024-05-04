@@ -1,0 +1,209 @@
+.service-dash{
+    display: flex;
+}
+
+.first{
+   flex:9;
+}
+
+.second{
+    flex:3;
+    display: flex;
+    flex-direction: column;
+}
+
+.pending-orders{
+    flex:5;
+    background-color: rgb(164, 198, 250);
+    display: flex;
+    flex-direction: column;
+    margin:0px 10px;
+}
+
+.order-head{
+    display: flex;
+    background-color: rgb(119, 171, 255);
+    padding:10px;
+}
+
+.order-container{
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    height: 81%;
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow-y: scroll;
+    scrollbar-width: 5px;
+    scroll-snap-stop: none;
+}
+
+.single-order{
+   display: flex;
+   padding: 5px;
+   margin: 5px;
+   background-color: rgb(205, 230, 253);
+   border-radius: 5px;
+   box-shadow: 1px 1px 5px rgb(183, 183, 183);
+}
+
+
+.name{
+    flex:7;
+    font-size: 21px;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.single-contact{
+    flex:2;
+    display: flex;
+}
+
+.single-order:hover{
+    transform: translateX(3px);
+}
+
+.single-contact > a{
+    margin-right: 4px;
+}
+
+.complete-delete{
+    flex:2;
+    display: flex;
+    justify-content: center;
+}
+
+.complete-delete > a{
+    margin-right: 30px;
+}
+
+.select-icon{
+    font-size: 20px;
+    color: rgb(1, 85, 158);
+}
+
+.order-head > h2 > i{
+    margin-right: 5px;
+}
+
+.my-work{
+   flex:8;
+}
+
+.work-container{
+    margin: 5px 10px;
+    background-color: rgb(193, 224, 249);
+    padding: 10px;
+    height: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.work-container > img{
+    width: 32%;
+    margin: 5px;
+    box-shadow: 1px 1px 3px black;
+    object-fit: cover;
+}
+
+.head-template{
+    margin: 10px;
+    background-color: rgb(119, 171, 255);
+    padding: 10px;
+}
+
+.head-template > h2 > i{
+    margin-right: 10px;
+}
+
+.edit{
+    display: flex;
+    justify-content: right;
+}
+
+.edit > a{
+    text-decoration: none;
+    margin-right: 15px;
+    margin-top: 5px;
+    color: black;
+    font-size: 18px;
+    background-color: rgb(178, 219, 255);
+    padding:7px;
+}
+
+.edit > a > i{
+    margin-left: 2px;
+}
+
+.comments{
+    flex:5;
+    display: flex;
+    flex-direction: column;
+}
+
+.comments2{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.comments-heading{
+    background-color: rgb(119, 171, 255);
+    height:50px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin:2px 9px;
+}
+
+.heading-box-comment{
+    margin-left: 10px;
+}
+
+.user-img-comment{
+    width:50px;
+    height:50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.comment-box{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height:250px;
+}
+
+.single-comment-box{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    background-color: rgb(187, 223, 255);
+    margin:5px 10px;
+    padding:20px;
+    border-radius: 10px;
+    transform: scale3d(0.95,0.95,0.95);
+}
+
+.first-box{
+    flex:1.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.first-box > h3{
+    font-size: 17px;
+    font-weight: 1000;
+    padding: 5px 5px;
+}
+
+.second-box{
+    flex:9;
+}

@@ -1,0 +1,5 @@
+package com.flipside.api.Entities;
+
+public class ServiceProvider {
+     
+}

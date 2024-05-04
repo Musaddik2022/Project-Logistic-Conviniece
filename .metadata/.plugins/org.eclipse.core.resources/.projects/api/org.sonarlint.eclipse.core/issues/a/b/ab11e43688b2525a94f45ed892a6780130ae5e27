@@ -1,0 +1,33 @@
+
+“squid:S1488Ï"^Immediately return this expression instead of assigning it to the temporary variable "result".(“îï÷8ºÚÌÃ£0HÙRMINORZ
+CODE_SMELL
+squid:S1192M"HDefine a constant instead of duplicating this literal "plumber" 9 times.(âúš“8ò˜êÂ£0HÔRCRITICALZ
+CODE_SMELL
+†squid:S1192w"JDefine a constant instead of duplicating this literal "carpenter" 9 times.(÷µ……ıÿÿÿÿ8Úë™Â£0HàRCRITICALZ
+CODE_SMELL
+ksquid:S2589*"7Remove this expression which always evaluates to "true"(ËÄÒ‚8şê™Ñ¢0HßRMAJORZ
+CODE_SMELL
+“squid:S2293 "YReplace the type specification in this constructor call with the diamond operator ("<>").(¸€¼˜ùÿÿÿÿ8ò˜êÂ£0HÜRMINORZ
+CODE_SMELL
+squid:S1192¡"QDefine a constant instead of duplicating this literal "packersandmovers" 9 times.(±±›°ÿÿÿÿÿ8ò˜êÂ£0H×RCRITICALZ
+CODE_SMELL
+ˆsquid:S1192b"LDefine a constant instead of duplicating this literal "electrician" 9 times.(”áİóûÿÿÿÿ8ò˜êÂ£0HâRCRITICALZ
+CODE_SMELL
+€squid:S1192Œ"HDefine a constant instead of duplicating this literal "painter" 9 times.(ï¸ó8ï¥Â£0HÖRCRITICALZ
+CODE_SMELL
+“squid:S1488Ò"^Immediately return this expression instead of assigning it to the temporary variable "result".(Éš—8ÀÁÃ£0HãRMINORZ
+CODE_SMELL
+’squid:S2293v"YReplace the type specification in this constructor call with the diamond operator ("<>").(¸€¼˜ùÿÿÿÿ8µÂ¶«£0HŞRMINORZ
+CODE_SMELL
+“squid:S2293‹"YReplace the type specification in this constructor call with the diamond operator ("<>").(¸€¼˜ùÿÿÿÿ8ï¥Â£0HÛRMINORZ
+CODE_SMELL
+“squid:S2293µ"YReplace the type specification in this constructor call with the diamond operator ("<>").(¸€¼˜ùÿÿÿÿ8ò˜êÂ£0HÓRMINORZ
+CODE_SMELL
+dsquid:S1481"+Remove this unused "result" local variable.(ëÓäÖıÿÿÿÿ8êã…Ğ¢0HÕRMINORZ
+CODE_SMELL
+’squid:S2293a"YReplace the type specification in this constructor call with the diamond operator ("<>").(¸€¼˜ùÿÿÿÿ8ò˜êÂ£0HäRMINORZ
+CODE_SMELL
+’squid:S2293L"YReplace the type specification in this constructor call with the diamond operator ("<>").(¸€¼˜ùÿÿÿÿ8ò˜êÂ£0HÚRMINORZ
+CODE_SMELL
+ƒsquid:S1192¶"KDefine a constant instead of duplicating this literal "tilesmaker" 9 times.(«ìĞû8ò˜êÂ£0HØRCRITICALZ
+CODE_SMELL

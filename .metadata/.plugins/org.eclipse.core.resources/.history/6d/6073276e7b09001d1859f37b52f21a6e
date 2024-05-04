@@ -1,0 +1,162 @@
+package com.flipside.api.Entities;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+@Entity
+public class ServiceProvider {
+	private String email;
+	private String adress;
+	private String city;
+	private String state;
+	private String mobile;
+	private String password;
+	private String occupation;
+	private boolean isLogin;
+	private String description;
+	@Lob
+	private byte[] profile;
+	@OneToMany
+	private List<WorkImage> work;
+	@ManyToMany
+	private List<User> orders;
+
+	public ServiceProvider() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ServiceProvider(String email, String adress, String city, String state, String mobile, String password,
+			String occupation, boolean isLogin, String description, byte[] profile, List<WorkImage> work,
+			List<User> orders) {
+		super();
+		this.email = email;
+		Adress = adress;
+		this.city = city;
+		this.state = state;
+		this.mobile = mobile;
+		this.password = password;
+		this.occupation = occupation;
+		this.isLogin = isLogin;
+		this.description = description;
+		this.profile = profile;
+		this.work = work;
+		this.orders = orders;
+	}
+
+	public ServiceProvider(String email, String adress, String city, String state, String mobile, String password,
+			String occupation, boolean isLogin, String description, byte[] profile) {
+		super();
+		this.email = email;
+		Adress = adress;
+		this.city = city;
+		this.state = state;
+		this.mobile = mobile;
+		this.password = password;
+		this.occupation = occupation;
+		this.isLogin = isLogin;
+		this.description = description;
+		this.profile = profile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAdress() {
+		return Adress;
+	}
+
+	public void setAdress(String adress) {
+		Adress = adress;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
+	public boolean isLogin() {
+		return isLogin;
+	}
+
+	public void setLogin(boolean isLogin) {
+		this.isLogin = isLogin;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public byte[] getProfile() {
+		return profile;
+	}
+
+	public void setProfile(byte[] profile) {
+		this.profile = profile;
+	}
+
+	public List<WorkImage> getWork() {
+		return work;
+	}
+
+	public void setWork(List<WorkImage> work) {
+		this.work = work;
+	}
+
+	public List<User> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<User> orders) {
+		this.orders = orders;
+	}
+
+}

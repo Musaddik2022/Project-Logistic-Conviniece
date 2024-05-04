@@ -1,0 +1,48 @@
+package com.flipside.api.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.flipside.api.Entities.ServiceProvider;
+
+public interface ServiceProviderDao extends JpaRepository<ServiceProvider, Integer>{
+    
+	@Query(value="select * from service_provider where email=:e and password=:p",nativeQuery=true)
+	ServiceProvider verifyService(@Param("e") String email,@Param("p") String password);
+    
+	//Carpenters Top 3
+	
+	@Query(value="select * from service_provider where rating = (select max(rating) from service_provider) and occupation='carpenter'",nativeQuery=true)
+	ArrayList<ServiceProvider> getFirstCarpenter();
+    
+	@Query(value="select * from service_provider where rating = (select Max(rating) from (select * from service_provider where rating < (select max(rating) from service_provider)  and occupation='carpenter') as s1 )",nativeQuery=true)
+	ArrayList<ServiceProvider> getSecondCarpenter();
+    
+	@Query(value="select * from service_provider where rating = (select Max(rating) from (select * from service_provider where rating < (select Max(rating) from (select * from service_provider where rating < (select max(rating) from service_provider) and occupation='carpenter') as s1 ) and occupation='carpenter') as s2)",nativeQuery=true)
+	ArrayList<ServiceProvider> getThirdCarpenter();
+    
+	
+	@Transactional
+	@Modifying
+	@Query(value="update service_provider set rating=:r where id=:i",nativeQuery=true)
+	int setRating(@Param("i") int id,@Param("r") int rating);
+    
+	@Query(value="select rating from service_provider where id=:i",nativeQuery=true)
+	int getRating(@Param("i") int id);
+	
+	@Query(value="select total_ratings from service_provider where id=:i",nativeQuery=true)
+	int getTotalRating(@Param("i") int id);
+    
+	@Transactional
+	@Modifying
+	@Query(value="update service_provider set total_ratings=:t where id=:i",nativeQuery=true)
+	int increamentRating(@Param("i") int id,@Param("t") int total);
+
+}

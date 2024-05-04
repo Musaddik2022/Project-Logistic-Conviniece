@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Id"/>
+    <fullyQualifiedTypeName name="com.flipside.api.Entities.TempDate"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.flipside.api.Entities.ListDates"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+    <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
+    <fullyQualifiedTypeName name="com.flipside.api.Repository.DatesDao"/>
+    <fullyQualifiedTypeName name="com.flipside.api.Entities.Dates"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Modifying"/>
+    <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
+    <fullyQualifiedTypeName name="com.twilio.Twilio"/>
+    <fullyQualifiedTypeName name="com.twilio.rest.api.v2010.account.Message"/>
+    <fullyQualifiedTypeName name="com.twilio.type.PhoneNumber"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="com.flipside.api.Repository.ServiceProviderDao"/>
+</qualifiedTypeNameHistroy>

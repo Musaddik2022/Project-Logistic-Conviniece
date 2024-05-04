@@ -1,0 +1,5 @@
+
+Œsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¶õƒ¦ùÿÿÿÿHdRMINORZ
+CODE_SMELL
+Šsquid:UselessImportCheck"LRemove this unused import 'org.springframework.web.multipart.MultipartFile'.(ôŸœžÿÿÿÿÿHeRMINORZ
+CODE_SMELL

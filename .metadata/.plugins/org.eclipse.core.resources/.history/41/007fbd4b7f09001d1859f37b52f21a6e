@@ -1,0 +1,54 @@
+package com.flipside.api.controllers;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.flipside.api.Entities.ServiceProvider;
+import com.flipside.api.service.Service;
+
+@RestController
+public class Controller {
+	
+	@Autowired
+	private Service service;
+	
+	@GetMapping("/services")
+	public List<ServiceProvider> getAll(){
+		return service.getAll();
+	}
+	
+	@PostMapping("/services")
+	public ServiceProvider addService(
+			@RequestParam("email") String email,
+			@RequestParam("adress") String adress,
+			@RequestParam("city") String city,
+			@RequestParam("state") String state,
+			@RequestParam("mobile") String mobile,
+			@RequestParam("password") String password,
+			@RequestParam("occupation") String occupation,
+			@RequestParam("isLogin") boolean isLogin,
+			@RequestParam("description") String description,
+			@RequestParam("profile") MultipartFile profile
+			) {
+		
+		ServiceProvider serviceProvider;
+		try {
+			serviceProvider = new ServiceProvider(email,adress,city,state,mobile,password,occupation,isLogin,description,profile.getBytes());
+			serviceProvider.setOrders(null);
+			serviceProvider.setWork(null);
+			return service.addService(serviceProvider);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

@@ -1,0 +1,361 @@
+.home{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+}
+
+.slider{
+    display: flex;
+    overflow: hidden;
+    animation: slidingOriginal 25s linear infinite;
+}
+
+.slider > img{
+    width:700px;
+    height:500px;
+    object-fit: cover;
+}
+
+.heading{
+    font-size:300px;
+    margin-top: -170px;
+    color: rgb(72, 217, 250);
+}
+
+@keyframes slidingOriginal{
+    0%{
+        margin-left: 0px;
+    }
+
+    50%{
+        margin-left:-2650px;
+    }
+
+    100%{
+        margin-left: 0px;
+    }
+}
+
+.major-list{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 120px;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: rgb(235, 251, 255);
+}
+
+.service-items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.small-card{
+    display: flex;
+    text-decoration: none;
+    color: rgb(0, 47, 77);
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    margin-right: 40px;
+    padding:10px
+}
+
+.small-card:hover{
+    text-shadow: 1px 1px 5px rgb(128, 219, 255);
+}
+
+.major-list > h1{
+    font-size: 50px;
+    letter-spacing: 2px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom: 30px;
+    color: rgb(0, 99, 126);
+}
+
+.major-icon{
+    font-size: 50px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.services{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    margin-top: 80px;
+    width:100%;
+}
+
+.service-box{
+    margin-top: 50px;
+   display: flex;
+   flex-direction: column;
+   justify-items: left;
+   justify-content: left;
+   width:95%;
+}
+
+.service-heading{
+    color: rgb(0, 120, 147);
+    text-decoration:underline black;
+    margin-bottom: 50px;
+    margin-left: 20px;
+}
+
+.box-item{
+    display: flex;
+    overflow:hidden;
+    background-color: rgb(239, 244, 247);
+    border-radius: 8px;
+}
+
+.card{
+    width:33.33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.card-image{
+    width: 250px;
+    height:250px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.box-item{
+   padding:30px;
+   width:98%;
+}
+
+.card > h5{
+    color: rgb(0, 120, 147);
+    padding-top: 5px;
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.card > p{
+    padding-top: 5px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+}
+
+.rating{
+    padding-top:10px;
+}
+
+.rating-icon{
+    font-size: 25px;
+    color:rgb(72, 217, 250); 
+}
+
+.card > a{
+    margin-top: 10px;
+    text-decoration: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 23px;
+    color: black;
+}
+
+.card > a:hover{
+    text-shadow: 1px 1px 5px rgb(72, 217, 250);
+}
+
+.seeall{
+    display: flex;
+    justify-content: right;
+    align-content: center;
+}
+
+.see-all{
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 25px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+    color:rgb(17, 90, 106) ;
+}
+
+.Contact{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    background-color: aliceblue;
+    padding: 30px;
+    width: 100%;
+}
+
+.social{
+    margin-top: 20px;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.social > a{
+    margin-left: 10px;
+}
+
+.social-icon{
+    color: black;
+    font-size: 30px;
+}
+
+.other{
+    margin-top: 20px;
+}
+
+.other > h4{
+    margin-bottom: 10px;
+}
+
+.welcome{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 95%;
+    align-content: center;
+    align-items: left;
+    justify-items: center;
+    height:550px;
+    margin-top: 50px;
+    background-color: aliceblue;
+    padding:30px 0px;
+    box-shadow: 0px 1px 5px black;
+    
+}
+
+.welcome > h1{
+    color: rgb(45, 144, 167);
+    font-size: 80px;
+    margin:20px 0px;
+    margin-left: 72px;
+}
+
+.welcome > h3{
+    font-size: 30px;
+    color: rgb(89, 89, 89);
+    margin: 20px 0px;
+    margin-left: 72px;
+}
+
+.welcome > a{
+    text-decoration: none;
+    font-size: 24px;
+    color: rgb(2, 2, 2);
+    background-color: rgb(147, 205, 255);
+    width:150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 72px;
+}
+
+.welcome > a > i{
+    margin-right: 7px;
+}
+
+.user-profile-home-img{
+    width:200px;
+    height:200px;
+    object-fit: cover;
+    margin: 10px 0px;
+    margin-left: 72px;
+    box-shadow: 1px 1px 5px black;
+}
+
+.user-profile-home{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.user-profile-home > a{
+    margin-left: 72px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    background-color: rgb(126, 205, 254);
+    width: 111px;
+    padding:6px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.user-profile-home > a >i {
+    margin-right: 5px;
+    animation: rotate 8s linear infinite;
+}
+
+.notifications{
+    display: flex;
+    justify-content: right;
+    align-content: center;
+}
+
+.notification-icon-box{
+    display: flex;
+    margin-right: 30px;
+}
+
+.notification-icon-box > a{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(0, 96, 140);
+}
+
+.ringing{
+    margin-right: 5px;
+    margin-top: 2px;
+    animation: ring 2s infinite linear;
+}
+
+@keyframes ring{
+    0%{
+        transform: rotateZ(15deg);
+    }
+    50%{
+        transform: rotateZ(-15deg);
+    }
+    100%{
+        transform: rotateZ(15deg);
+    }
+}
+
+@keyframes rotate{
+    0%{
+        transform: rotateZ(0deg);
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}

@@ -1,0 +1,80 @@
+.user-register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    height:150vh;
+    background-image: url(https://egertontm.com/wp-content/uploads/2018/06/blue-gradient-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.register-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: rgb(191, 225, 255);
+    padding:30px;
+    box-shadow: 1px 1px 5px black ;
+}
+
+.register-box > h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 50px;
+}
+
+.register-box > form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-box > label{
+    font-size: 23px; 
+    color:rgb(6, 51, 119);
+    margin-right:10px;
+}
+
+.input-box{
+    margin-bottom: 20px;
+    transform: scale(1.05);
+}
+
+.input-box > input{
+    height:25px;
+    border-radius: 3px;
+    border: none;
+}
+
+form > button{
+    padding:5px 10px;
+    margin-top: 15px;
+    background-color: rgb(82, 174, 255);
+    border: none;
+    border-radius: 3px;
+}
+
+.back{
+    height: 200px;
+}
+
+.user-image-register{
+    height:150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.input-box > button{
+    margin-left: 170px;
+    padding: 5px;
+    color: white;
+    background-color: rgb(25, 91, 148);
+}
+
+

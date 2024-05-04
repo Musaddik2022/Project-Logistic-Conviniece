@@ -1,0 +1,216 @@
+package com.flipside.api.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.flipside.api.Entities.ServiceProvider;
+import com.flipside.api.Entities.User;
+import com.flipside.api.Repository.ServiceProviderDao;
+import com.flipside.api.Repository.UserDao;
+import com.flipside.api.accessories.RatingComparator;
+
+@org.springframework.stereotype.Service
+public class Service {
+    @Autowired
+	private UserDao userDao;
+    @Autowired
+	private ServiceProviderDao serviceDao;
+	
+	public String addUser(User user) {
+		if(userDao.verifyEmail(user.getEmail())==1) {
+			return "already exists";
+		}
+		User result = userDao.save(user);
+		return "user registerd";
+	}
+
+	public String getUser(String email, String password) {
+		User user = userDao.verifyUser(email,password);
+		if(user!=null) {
+			return Integer.toString(user.getId());
+		}
+		return "not verified";
+	}
+
+	public String addservice(ServiceProvider sp) {
+		if(serviceDao.verifyEmail(sp.getEmail())==1) {
+			return "already exists";
+		}
+		ServiceProvider result = serviceDao.save(sp);
+		if(result!=null) {
+			return "service registered";
+		}
+		return "not Registerd";
+	}
+
+	public String getService(String email, String password) {
+        ServiceProvider result = serviceDao.verifyService(email,password);
+        if(result!=null) {
+        	return Integer.toString(result.getId());
+        }
+		return "not verified";
+	}
+
+	public int getRating(int id) {
+		return serviceDao.getRating(id);
+	}
+	
+	public int getTotalRatings(int id) {
+		return serviceDao.getTotalRating(id);
+	}
+   
+	public String setRating(int id, int rating) {
+		int newRating = getRating(id)*getTotalRatings(id);
+		newRating = (newRating+rating)/(getTotalRatings(id)+1);
+		int result = serviceDao.setRating(id,newRating);
+		if(result > 0) {
+			serviceDao.increamentRating(id,getTotalRatings(id)+1);
+			return "rating is registered";
+		}
+		return "Rating is not registered";
+	}
+
+	public List<ServiceProvider> getTopPlumber() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating  = serviceDao.firstRating("plumber")==null ? 0: serviceDao.firstRating("plumber");
+		int secondRating = serviceDao.secondRating("plumber", firstRating)==null ? 0: serviceDao.secondRating("plumber",firstRating);
+		int thirdRating = serviceDao.thirdRating("plumber", secondRating)==null ? 0: serviceDao.thirdRating("plumber",secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("plumber",firstRating); 
+		List<ServiceProvider> second = serviceDao.getSecond("plumber",secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("plumber",thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+
+	public List<ServiceProvider> getTopElectrician() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating  = serviceDao.firstRating("electrician")==null ? 0: serviceDao.firstRating("electrician");
+		int secondRating = serviceDao.secondRating("electrician", firstRating)==null ? 0: serviceDao.secondRating("electrician",firstRating);
+		int thirdRating = serviceDao.thirdRating("electrician", secondRating)==null ? 0: serviceDao.thirdRating("electrician",secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("electrician",firstRating); 
+		List<ServiceProvider> second = serviceDao.getSecond("electrician",secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("electrician",thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+	
+	public List<ServiceProvider> getTopCarpenter() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating  = serviceDao.firstRating("carpenter")==null ? 0: serviceDao.firstRating("carpenter");
+		int secondRating = serviceDao.secondRating("carpenter", firstRating)==null ? 0: serviceDao.secondRating("carpenter",firstRating);
+		int thirdRating = serviceDao.thirdRating("carpenter", secondRating)==null ? 0: serviceDao.thirdRating("carpenter",secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("carpenter",firstRating); 
+		List<ServiceProvider> second = serviceDao.getSecond("carpenter",secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("carpenter",thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+	
+	public List<ServiceProvider> getTopPainter(){
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating  = serviceDao.firstRating("painter")==null ? 0: serviceDao.firstRating("painter");
+		int secondRating = serviceDao.secondRating("painter", firstRating)==null ? 0: serviceDao.secondRating("painter",firstRating);
+		int thirdRating = serviceDao.thirdRating("painter", secondRating)==null ? 0: serviceDao.thirdRating("painter",secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("painter",firstRating); 
+		List<ServiceProvider> second = serviceDao.getSecond("painter",secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("painter",thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+
+	public List<ServiceProvider> getTopPackers() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating  = serviceDao.firstRating("packersandmovers")==null ? 0: serviceDao.firstRating("packersandmovers");
+		int secondRating = serviceDao.secondRating("packersandmovers", firstRating)==null ? 0: serviceDao.secondRating("packersandmovers",firstRating);
+		int thirdRating = serviceDao.thirdRating("packersandmovers", secondRating)==null ? 0: serviceDao.thirdRating("packersandmovers",secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("packersandmovers",firstRating); 
+		List<ServiceProvider> second = serviceDao.getSecond("packersandmovers",secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("packersandmovers",thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+
+	public List<ServiceProvider> getTopTilesMaker() {
+		List<ServiceProvider> result = new ArrayList<ServiceProvider>();
+		int firstRating  = serviceDao.firstRating("tilesmaker")==null ? 0: serviceDao.firstRating("tilesmaker");
+		int secondRating = serviceDao.secondRating("tilesmaker", firstRating)==null ? 0: serviceDao.secondRating("tilesmaker",firstRating);
+		int thirdRating = serviceDao.thirdRating("tilesmaker", secondRating)==null ? 0: serviceDao.thirdRating("tilesmaker",secondRating);
+		List<ServiceProvider> first = serviceDao.getFirst("tilesmaker",firstRating); 
+		List<ServiceProvider> second = serviceDao.getSecond("tilesmaker",secondRating);
+		List<ServiceProvider> third = serviceDao.getThird("tilesmaker",thirdRating);
+		result.addAll(first);
+		result.addAll(second);
+		result.addAll(third);
+		result.sort(new RatingComparator());
+		List<ServiceProvider> actualList = new ArrayList<>();
+		for(ServiceProvider sp: result) {
+			if(result.indexOf(sp)<3) {
+				actualList.add(sp);
+			}
+		}
+		return result;
+	}
+
+	public List<ServiceProvider> getAll(String occ,String sortBy,String city) {
+		if(sortBy=="rating") {
+		   List<ServiceProvider> result = serviceDao.getAll(occ);
+		   result.sort(new RatingComparator());	
+		   return result;
+		}else if(sortBy=="nearby") {
+		   List<ServiceProvider> result = serviceDao.getAll(occ,city);
+		   return result;
+		}else {
+		   List<ServiceProvider> result = serviceDao.getAll(occ);
+		   return result;
+		}
+	}
+
+
+}

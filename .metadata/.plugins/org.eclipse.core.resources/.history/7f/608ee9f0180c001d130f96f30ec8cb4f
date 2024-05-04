@@ -1,0 +1,14 @@
+package com.flipside.api.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.flipside.api.Entities.ServiceProvider;
+
+public interface ServiceProviderDao extends JpaRepository<ServiceProvider, Integer>{
+    
+	@Query(value="select * from service_provider where email=:e and password=:p",nativeQuery=true)
+	ServiceProvider verifyService(@Param("e") String email,@Param("p") String password);
+
+}
